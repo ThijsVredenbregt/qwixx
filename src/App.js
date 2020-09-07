@@ -105,6 +105,10 @@ class App extends Component {
 			items[items.length-1].disabled = false
 		}
 
+		if (items[items.length-1].checked === true) {
+			checkedQty++
+		}
+
 		let scoreboard = this.state.scoreboard
 	    scoreboard[checkbox.row] = (checkedQty*(checkedQty+1))/2
 		this.setState({scoreboard: scoreboard})
