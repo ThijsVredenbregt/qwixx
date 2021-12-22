@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import './App.css';
-import MissedThrows from './MissedThrows'
-import Scorrer from './Scorrer'
-import Scoreboard from './Scoreboard'
+import MissedThrows from './gamemodes/classic/MissedThrows'
+import Scorrer from './gamemodes/classic/Scorrer'
+import Scoreboard from './gamemodes/classic/Scoreboard'
 import SideBar from "./Sidebar";
 import './Sidebar.css';
 
@@ -130,16 +130,11 @@ class App extends Component {
 
 	render () {
 		return (
-			<div className="App" style={{flex:1, flexDirection: 'column', justifyContent:'space-evenly',display:'flex'}}>		
-				<div style={{flex:1, flexDirection: 'row', justifyContent:'space-evenly',display:'flex'}}>
-					<div style={{flex:1,display:'flex'}}>
-						<SideBar pageWrapId={"page-wrap"} outerContainerId={"App"} isOpen={this.state.menu.isOpen} onMenuStateChange={this.handleMenuStateChange} onClickReset={this.handleOnClickReset} />
-						<div id="page-wrap"></div>
-					</div>
-					<div style={{flex:1,display:'flex'}}>
-						<MissedThrows row="grey" items={this.state.grey} onClickHandler={this.handleMissedThrowOnClick} />
-					</div>
-				</div>				
+			<div className="App" style={{flex:1, flexDirection: 'column', justifyContent:'space-evenly',display:'flex'}}>
+				<SideBar pageWrapId={"page-wrap"} outerContainerId={"App"} isOpen={this.state.menu.isOpen} onMenuStateChange={this.handleMenuStateChange} onClickReset={this.handleOnClickReset} />
+
+
+				<MissedThrows row="grey" items={this.state.grey} onClickHandler={this.handleMissedThrowOnClick} />
 				<Scorrer row="red" lightColor="#ffe2e0" darkColor="darkred" color="red" items={this.state.red} onClickHandler={this.handleScorrerOnClick}/>
 				<Scorrer row="yellow" lightColor="lightyellow" darkColor="#caca00" color="yellow" items={this.state.yellow} onClickHandler={this.handleScorrerOnClick} />
 				<Scorrer row="green" lightColor="lightgreen" darkColor="darkgreen" color="green" items={this.state.green} onClickHandler={this.handleScorrerOnClick} />

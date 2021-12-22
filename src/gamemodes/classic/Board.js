@@ -1,0 +1,115 @@
+import React from 'react';
+import MissedThrows from "./MissedThrows";
+import Scorrer from "./Scorrer";
+import Scoreboard from "./Scoreboard";
+
+function getDefaultState () {
+    return {
+        red: [
+            {id: "two", value:2, checked: false, disabled: false},{id: "three", value:3, checked: false, disabled: false},{id: "four", value:4, checked: false, disabled: false},
+            {id: "five", value:5, checked: false, disabled: false},{id: "six", value:6, checked: false, disabled: false},{id: "seven", value:7, checked: false, disabled: false},
+            {id: "aight", value:8, checked: false, disabled: false},{id: "nine", value:9, checked: false, disabled: false},{id: "ten", value:10, checked: false, disabled: false},
+            {id: "eleven", value:11, checked: false, disabled: false},{id: "twelve", value:12, checked: false, disabled: true}
+        ],
+        yellow: [
+            {id: "two", value:2, checked: false, disabled: false},{id: "three", value:3, checked: false, disabled: false},{id: "four", value:4, checked: false, disabled: false},
+            {id: "five", value:5, checked: false, disabled: false},{id: "six", value:6, checked: false, disabled: false},{id: "seven", value:7, checked: false, disabled: false},
+            {id: "aight", value:8, checked: false, disabled: false},{id: "nine", value:9, checked: false, disabled: false},{id: "ten", value:10, checked: false, disabled: false},
+            {id: "eleven", value:11, checked: false, disabled: false},{id: "twelve", value:12, checked: false, disabled: true}
+        ],
+        green: [
+            {id: "twelve", value:12, checked: false, disabled: false},{id: "eleven", value:11, checked: false, disabled: false},{id: "ten", value:10, checked: false, disabled: false},
+            {id: "nine", value:9, checked: false, disabled: false},{id: "aight", value:8, checked: false, disabled: false},{id: "seven", value:7, checked: false, disabled: false},
+            {id: "six", value:6, checked: false, disabled: false},{id: "five", value:5, checked: false, disabled: false},{id: "four", value:4, checked: false, disabled: false},
+            {id: "three", value:3, checked: false, disabled: false},{id: "two", value:2, checked: false, disabled: true}
+        ],
+        blue: [
+            {id: "twelve", value:12, checked: false, disabled: false},{id: "eleven", value:11, checked: false, disabled: false},{id: "ten", value:10, checked: false, disabled: false},
+            {id: "nine", value:9, checked: false, disabled: false},{id: "aight", value:8, checked: false, disabled: false},{id: "seven", value:7, checked: false, disabled: false},
+            {id: "six", value:6, checked: false, disabled: false},{id: "five", value:5, checked: false, disabled: false},{id: "four", value:4, checked: false, disabled: false},
+            {id: "three", value:3, checked: false, disabled: false},{id: "two", value:2, checked: false, disabled: true}
+        ],
+        grey: [
+            {id:1, checked:false},{id:2, checked:false},{id:3, checked:false},{id:4, checked:false}
+        ],
+        scoreboard: {red:0,yellow:0,green:0,blue:0,grey:0},
+        menu: {isOpen:false}
+    }
+}
+
+function handleMissedThrowOnClick(event) {
+    let checkbox = event.target.dataset
+    let items = this.state[checkbox.row]
+    let checkedQty = 0;
+    items.forEach(item => {
+        if (item.id === Number(checkbox.id)) {
+            item.checked = !item.checked
+        }
+
+        if (item.checked === true) {
+            checkedQty++
+        }
+    })
+    let scoreboard = this.state.scoreboard
+    scoreboard[checkbox.row] = checkedQty * 5
+    this.setState({scoreboard: scoreboard})
+    this.setState({[checkbox.row]: items})
+}
+
+function handleScorrerOnClick(event) {
+    let checkbox = event.target.dataset
+    let items = this.state[checkbox.row]
+    let checkedQty = 0;
+    items.forEach(item => {
+        if (item.value === Number(checkbox.value) && !item.disabled) {
+            item.checked = !item.checked
+
+            for (var i = (checkbox.index-1) ; i >= 0 ; i--) {
+                items[i].disabled = true
+
+                if (!item.checked) {
+                    items[i].disabled = false
+                    if (items[i].checked) {
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (item.checked === true) {
+            checkedQty++
+        }
+    })
+
+    if (checkedQty < 5) {
+        items[items.length-1].disabled = true
+        items[items.length-1].checked = false
+    } else {
+        items[items.length-1].disabled = false
+    }
+
+    if (items[items.length-1].checked === true) {
+        checkedQty++
+    }
+
+    let scoreboard = this.state.scoreboard
+    scoreboard[checkbox.row] = (checkedQty*(checkedQty+1))/2
+    this.setState({scoreboard: scoreboard})
+    this.setState({[checkbox.row]: items})
+}
+
+function Board(Props) {
+    return(
+        <div>
+            <MissedThrows row="grey" items={Props.grey} onClickHandler={handleMissedThrowOnClick} />
+            <Scorrer row="red" lightColor="#ffe2e0" darkColor="darkred" color="red" items={this.state.red} onClickHandler={handleScorrerOnClick}/>
+            <Scorrer row="yellow" lightColor="lightyellow" darkColor="#caca00" color="yellow" items={this.state.yellow} onClickHandler={handleScorrerOnClick} />
+            <Scorrer row="green" lightColor="lightgreen" darkColor="darkgreen" color="green" items={this.state.green} onClickHandler={handleScorrerOnClick} />
+            <Scorrer row="blue" lightColor="lightblue" darkColor="darkblue" color="blue" items={this.state.blue} onClickHandler={handleScorrerOnClick} />
+
+            <Scoreboard red={this.state.scoreboard.red} yellow={this.state.scoreboard.yellow} green={this.state.scoreboard.green} blue={this.state.scoreboard.blue} grey={this.state.scoreboard.grey}/>
+        </div>
+    );
+};
+
+export default Board;
