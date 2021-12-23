@@ -3,52 +3,70 @@ import MissedThrows from "./MissedThrows";
 import Scorrer from "./Scorrer";
 import Scoreboard from "./Scoreboard";
 
-class Board extends Component {
+const STORAGE_KEY = "gamemode.randomnumbers";
+
+class RandomNumbersBoard extends Component {
 
     constructor(props) {
         super(props)
 
-        let savedState = window.localStorage.getItem("gamemode")
+        let savedState = window.localStorage.getItem(STORAGE_KEY)
         if (savedState !== null) {
-            this.state = JSON.parse(savedState)
+            this.state = JSON.parse(savedState);
         } else {
             this.state = this.getDefaultState()
         }
 
-        window.localStorage.setItem("gamemode", JSON.stringify(this.state))
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(this.state))
+
+        this.handleMissedThrowOnClick = this.handleMissedThrowOnClick.bind(this);
+        this.handleScorrerOnClick = this.handleScorrerOnClick.bind(this);
+    }
+
+    componentDidUpdate() {
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(this.state))
     }
 
     getDefaultState () {
         return {
             red: [
-                {id: "two", value:2, checked: false, disabled: false},{id: "three", value:3, checked: false, disabled: false},{id: "four", value:4, checked: false, disabled: false},
-                {id: "five", value:5, checked: false, disabled: false},{id: "six", value:6, checked: false, disabled: false},{id: "seven", value:7, checked: false, disabled: false},
-                {id: "aight", value:8, checked: false, disabled: false},{id: "nine", value:9, checked: false, disabled: false},{id: "ten", value:10, checked: false, disabled: false},
-                {id: "eleven", value:11, checked: false, disabled: false},{id: "twelve", value:12, checked: false, disabled: true}
+                {id: "ten", value:10, checked: false, disabled: false},{id: "six", value:6, checked: false, disabled: false},
+                {id: "two", value:2, checked: false, disabled: false},{id: "aight", value:8, checked: false, disabled: false},
+                {id: "three", value:3, checked: false, disabled: false},{id: "four", value:4, checked: false, disabled: false},
+                {id: "twelve", value:12, checked: false, disabled: false},{id: "five", value:5, checked: false, disabled: false},
+                {id: "nine", value:9, checked: false, disabled: false},{id: "seven", value:7, checked: false, disabled: false},
+                {id: "eleven", value:11, checked: false, disabled: true}
             ],
             yellow: [
-                {id: "two", value:2, checked: false, disabled: false},{id: "three", value:3, checked: false, disabled: false},{id: "four", value:4, checked: false, disabled: false},
-                {id: "five", value:5, checked: false, disabled: false},{id: "six", value:6, checked: false, disabled: false},{id: "seven", value:7, checked: false, disabled: false},
-                {id: "aight", value:8, checked: false, disabled: false},{id: "nine", value:9, checked: false, disabled: false},{id: "ten", value:10, checked: false, disabled: false},
-                {id: "eleven", value:11, checked: false, disabled: false},{id: "twelve", value:12, checked: false, disabled: true}
+                {id: "nine", value:9, checked: false, disabled: false},{id: "twelve", value:12, checked: false, disabled: false},
+                {id: "four", value:4, checked: false, disabled: false},{id: "six", value:6, checked: false, disabled: false},
+                {id: "seven", value:7, checked: false, disabled: false},{id: "two", value:2, checked: false, disabled: false},
+                {id: "five", value:5, checked: false, disabled: false},{id: "aight", value:8, checked: false, disabled: false},
+                {id: "eleven", value:11, checked: false, disabled: false},{id: "three", value:3, checked: false, disabled: false},
+                {id: "ten", value:10, checked: false, disabled: true}
             ],
             green: [
-                {id: "twelve", value:12, checked: false, disabled: false},{id: "eleven", value:11, checked: false, disabled: false},{id: "ten", value:10, checked: false, disabled: false},
-                {id: "nine", value:9, checked: false, disabled: false},{id: "aight", value:8, checked: false, disabled: false},{id: "seven", value:7, checked: false, disabled: false},
-                {id: "six", value:6, checked: false, disabled: false},{id: "five", value:5, checked: false, disabled: false},{id: "four", value:4, checked: false, disabled: false},
-                {id: "three", value:3, checked: false, disabled: false},{id: "two", value:2, checked: false, disabled: true}
+                {id: "aight", value:8, checked: false, disabled: false},{id: "two", value:2, checked: false, disabled: false},
+                {id: "ten", value:10, checked: false, disabled: false},{id: "twelve", value:12, checked: false, disabled: false},
+                {id: "six", value:6, checked: false, disabled: false},{id: "nine", value:9, checked: false, disabled: false},
+                {id: "seven", value:7, checked: false, disabled: false},{id: "four", value:4, checked: false, disabled: false},
+                {id: "five", value:5, checked: false, disabled: false},{id: "eleven", value:11, checked: false, disabled: false},
+                {id: "three", value:3, checked: false, disabled: true},
             ],
             blue: [
-                {id: "twelve", value:12, checked: false, disabled: false},{id: "eleven", value:11, checked: false, disabled: false},{id: "ten", value:10, checked: false, disabled: false},
-                {id: "nine", value:9, checked: false, disabled: false},{id: "aight", value:8, checked: false, disabled: false},{id: "seven", value:7, checked: false, disabled: false},
-                {id: "six", value:6, checked: false, disabled: false},{id: "five", value:5, checked: false, disabled: false},{id: "four", value:4, checked: false, disabled: false},
-                {id: "three", value:3, checked: false, disabled: false},{id: "two", value:2, checked: false, disabled: true}
+                {id: "five", value:5, checked: false, disabled: false},{id: "seven", value:7, checked: false, disabled: false},
+                {id: "eleven", value:11, checked: false, disabled: false},{id: "nine", value:9, checked: false, disabled: false},
+                {id: "twelve", value:12, checked: false, disabled: false},{id: "three", value:3, checked: false, disabled: false},
+                {id: "aight", value:8, checked: false, disabled: false},{id: "ten", value:10, checked: false, disabled: false},
+                {id: "two", value:2, checked: false, disabled: false},{id: "six", value:6, checked: false, disabled: false},
+                {id: "four", value:4, checked: false, disabled: true},
+
             ],
             grey: [
                 {id:1, checked:false},{id:2, checked:false},{id:3, checked:false},{id:4, checked:false}
             ],
             scoreboard: {red:0,yellow:0,green:0,blue:0,grey:0},
-            gamemode: "classic"
+            gamemode: "RandomNumber"
         }
     }
 
@@ -128,4 +146,4 @@ class Board extends Component {
     }
 }
 
-export default Board;
+export default RandomNumbersBoard;

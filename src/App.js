@@ -32,6 +32,12 @@ class App extends Component {
 	handleOnClickReset = (event) => {
 		this.setState({menu: {isOpen: false}})
 		this.setState(this.getDefaultState())
+		window.localStorage.setItem("state", JSON.stringify(this.state))
+		window.localStorage.removeItem("gamemode.classic");
+		window.localStorage.removeItem("gamemode.randomnumbers");
+		window.localStorage.removeItem("gamemode.blackrow");
+		window.localStorage.removeItem("gamemode.randomrowpart");
+		window.localStorage.removeItem("gamemode.blacklink");
 	}
 
 	handleOnClickGamemodeClassic = (event) => {

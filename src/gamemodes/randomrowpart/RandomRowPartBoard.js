@@ -1,24 +1,30 @@
-import React, {Component} from 'react';
+import React from 'react';
 import MissedThrows from "./MissedThrows";
 import Scorrer from "./Scorrer";
 import Scoreboard from "./Scoreboard";
 
-class Board extends Component {
+const STORAGE_KEY = "gamemode.randomrowpart";
+
+class RandomRowPartBoard extends React.Component {
 
     constructor(props) {
         super(props)
 
-        let savedState = window.localStorage.getItem("gamemode")
+        let savedState = window.localStorage.getItem(STORAGE_KEY)
         if (savedState !== null) {
-            this.state = JSON.parse(savedState)
+            this.state = JSON.parse(savedState);
         } else {
             this.state = this.getDefaultState()
         }
 
-        window.localStorage.setItem("gamemode", JSON.stringify(this.state))
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(this.state))
     }
 
-    getDefaultState () {
+    componentDidUpdate() {
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(this.state))
+    }
+
+    getDefaultState() {
         return {
             red: [
                 {id: "two", value:2, checked: false, disabled: false},{id: "three", value:3, checked: false, disabled: false},{id: "four", value:4, checked: false, disabled: false},
@@ -128,4 +134,4 @@ class Board extends Component {
     }
 }
 
-export default Board;
+export default RandomRowPartBoard;

@@ -3,19 +3,28 @@ import MissedThrows from "./MissedThrows";
 import Scorrer from "./Scorrer";
 import Scoreboard from "./Scoreboard";
 
-class Board extends Component {
+const STORAGE_KEY = "gamemode.classic";
+
+class ClassicBoard extends Component {
 
     constructor(props) {
         super(props)
 
-        let savedState = window.localStorage.getItem("gamemode")
+        let savedState = window.localStorage.getItem(STORAGE_KEY)
         if (savedState !== null) {
-            this.state = JSON.parse(savedState)
+            this.state = JSON.parse(savedState);
         } else {
             this.state = this.getDefaultState()
         }
 
-        window.localStorage.setItem("gamemode", JSON.stringify(this.state))
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(this.state))
+
+        this.handleMissedThrowOnClick = this.handleMissedThrowOnClick.bind(this);
+        this.handleScorrerOnClick = this.handleScorrerOnClick.bind(this);
+    }
+
+    componentDidUpdate() {
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(this.state))
     }
 
     getDefaultState () {
@@ -48,7 +57,7 @@ class Board extends Component {
                 {id:1, checked:false},{id:2, checked:false},{id:3, checked:false},{id:4, checked:false}
             ],
             scoreboard: {red:0,yellow:0,green:0,blue:0,grey:0},
-            gamemode: "classic"
+            gamemode: "Classic"
         }
     }
 
@@ -128,4 +137,4 @@ class Board extends Component {
     }
 }
 
-export default Board;
+export default ClassicBoard;

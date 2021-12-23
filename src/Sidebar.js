@@ -11,16 +11,16 @@ export default Props => {
         <p onClick={ Props.onClickGamemodeClassic } className="menu-item">
             Klassiek
         </p>
-        <p onClick={ Props.onClickGamemodeBlackRow } className="menu-item">
+        <p onClick={ Props.onClickGamemodeBlackRow } className="menu-item" style={{display:"none"}}>
             Zwarte rij
         </p>
         <p onClick={ Props.onClickGamemodeRandomNumbers } className="menu-item">
             Willekeurige nummers
         </p>
-        <p onClick={ Props.onClickGamemodeBlackLink } className="menu-item">
+        <p onClick={ Props.onClickGamemodeBlackLink } className="menu-item" style={{display:"none"}}>
             Zwarte link
         </p>
-        <p onClick={ Props.onClickGamemodeRandomRowPart } className="menu-item">
+        <p onClick={ Props.onClickGamemodeRandomRowPart } className="menu-item" style={{display:"none"}}>
             Gehusselde rijen
         </p>
 
