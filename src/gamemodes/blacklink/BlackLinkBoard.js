@@ -121,7 +121,7 @@ class BlackLinkBoard extends Component {
 
     render() {
         return(
-            <div>
+            <React.Fragment>
                 <MissedThrows row="grey" items={this.state.grey} onClickHandler={this.handleMissedThrowOnClick} />
                 <Scorrer row="red" lightColor="#ffe2e0" darkColor="darkred" color="red" items={this.state.red} onClickHandler={this.handleScorrerOnClick}/>
                 <Scorrer row="yellow" lightColor="lightyellow" darkColor="#caca00" color="yellow" items={this.state.yellow} onClickHandler={this.handleScorrerOnClick} />
@@ -129,7 +129,7 @@ class BlackLinkBoard extends Component {
                 <Scorrer row="blue" lightColor="lightblue" darkColor="darkblue" color="blue" items={this.state.blue} onClickHandler={this.handleScorrerOnClick} />
 
                 <Scoreboard red={this.state.scoreboard.red} yellow={this.state.scoreboard.yellow} green={this.state.scoreboard.green} blue={this.state.scoreboard.blue} grey={this.state.scoreboard.grey}/>
-            </div>
+            </React.Fragment>
         );
     }
 }
