@@ -21,7 +21,12 @@ class BlackRowBoard extends Component {
     }
 
     componentDidUpdate() {
-        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(this.state))
+        if (window.localStorage.getItem(STORAGE_KEY) === null
+            && this.state !== this.getDefaultState) {
+            this.setState(this.getDefaultState());
+        }
+
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(this.state));
     }
 
     getDefaultState () {
