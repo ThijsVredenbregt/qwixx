@@ -10,7 +10,12 @@ class App extends Component {
 
 		let savedState = window.localStorage.getItem("state")
 		if (savedState !== null) {
-			this.state = JSON.parse(savedState)
+			let json = JSON.parse(savedState);
+			if (json.gamemode === undefined) {
+				this.state = this.getDefaultState();
+			} else {
+				this.state = json;
+			}
 		} else {
 			this.state = this.getDefaultState()
 		}
