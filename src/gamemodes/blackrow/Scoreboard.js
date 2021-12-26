@@ -6,9 +6,10 @@ function Scoreboard(Props) {
 			<span className="scoreboard" style={{borderColor:"red"}} name="red">{Props.red}</span>+
 			<span className="scoreboard" style={{borderColor:"yellow"}} name="yellow">{Props.yellow}</span>+
 			<span className="scoreboard" style={{borderColor:"green"}} name="green" >{Props.green}</span>+
-			<span className="scoreboard" style={{borderColor:"blue"}} name="blue" >{Props.blue}</span>-
+			<span className="scoreboard" style={{borderColor:"blue"}} name="blue" >{Props.blue}</span>+
+			<span className="scoreboard" style={{borderColor:"black"}} name="black" >{Props.black}</span>-
 			<span className="scoreboard" style={{borderColor:"grey"}} name="grey" >{Props.grey}</span>=
-			<span className="scoreboard" style={{borderColor:"black"}} name="total" >{(Props.red + Props.yellow + Props.green + Props.blue) - Props.grey}</span>
+			<span className="scoreboard" style={{borderColor:"black"}} name="total" >{(Props.red + Props.yellow + Props.green + Props.blue + Props.black) - Props.grey}</span>
 		</div>
 	);
 }

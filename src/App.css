@@ -60,6 +60,22 @@
   color: #000000ba;
 }
 
+.blacked-container {
+  align-items: normal !important;
+}
+
+.blacked {
+  border-color: black;
+  border-width: 3px;
+  border-style: solid;
+  margin: 4px;
+  border-radius: 8px;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
 .locked {
   flex:1;
   background-image: url(./img/locked.svg);
