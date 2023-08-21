@@ -9,8 +9,9 @@
     "react": "^16.13.1",
     "react-burger-menu": "^2.7.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1",
+    "react-scripts": "^5.0.1",
     "react-xarrows": "^2.0.2",
+    "type-fest": "^0.21.3",
     "typescript": "^5.1.6",
     "uuid": "^3.4.0"
   },
@@ -21,7 +22,6 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "Qwixx"
   },
   "browserslist": {
     "production": [
