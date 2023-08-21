@@ -113,3 +113,11 @@
     background-color: white;
     font-size: 24px;
 }
+
+.link {
+  border-color: black;
+  border-style: dashed;
+  border-width: medium;
+  padding: 20px;
+  border-radius: 50px;
+}
