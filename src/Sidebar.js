@@ -17,7 +17,7 @@ export default Props => {
         <p onClick={ Props.onClickGamemodeRandomNumbers } className="menu-item">
             Willekeurige nummers
         </p>
-        <p onClick={ Props.onClickGamemodeBlackLink } className="menu-item" style={{display:"none"}}>
+        <p onClick={ Props.onClickGamemodeBlackLink } className="menu-item">
             Zwarte link
         </p>
         <p onClick={ Props.onClickGamemodeRandomRowPart } className="menu-item" style={{display:"none"}}>
